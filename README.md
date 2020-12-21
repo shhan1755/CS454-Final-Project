@@ -10,7 +10,9 @@ K-DAsFault: Kaistian-Designed Automatically Testing Self-Driving Cars with Searc
 - 20170719 Han Seunghee
 
 # Repository description
-- KDAsFault
+- KDAsFault : Our K-DAsFault model.
+- Team21_Final Report : Final report of our project.
+- Team21_Final Presentation : Slides of our final presentation.
 
 # How to run the code
 1. Go to AD_Simul folder
@@ -46,6 +48,18 @@ python GA.py
 -w : map road width (default = 4)
 
 -n : path geneartion number (default = 3)
+
+Road number option
+To test for a single road, comment 337 line of Road.py and uncomment 338 line of Road.py.
+```python
+# road_number = random.choice([2,3])
+road_number = 1
+```
+To test for a multi road, comment 338 line of Road.py and uncomment 337 line of Road.py.
+```python
+road_number = random.choice([2,3])
+# road_number = 1
+```
 
 # Project Proposal Video
 Available at: https://youtu.be/xZsIdBGCrSQ
