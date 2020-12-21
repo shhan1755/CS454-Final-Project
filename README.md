@@ -62,6 +62,7 @@ To test for a multi road, comment 338 line of Road.py and uncomment 337 line of 
 road_number = random.choice([2,3])
 # road_number = 1
 ```
+(default = multi)
 
 # Project Proposal Video
 Available at: https://youtu.be/xZsIdBGCrSQ
