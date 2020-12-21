@@ -17,6 +17,7 @@ K-DAsFault: Kaistian-Designed Automatically Testing Self-Driving Cars with Searc
 # How to run the code
 1. Go to AD_Simul folder
 ```bash
+cd KDAsFault
 cd AD_Simul
 ```
 2. Open LKA_Test.m
