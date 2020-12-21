@@ -146,6 +146,7 @@ class RoadNetwork:
         self.roads = []
         self.mapsize = [x_size, y_size]
         self.waypoints = None
+        self.path = []
 
     def addRoad(self, new_road):
         self.roads.append(new_road)
@@ -334,8 +335,8 @@ def CreateRandomRoad(map_x, map_y, width):
 
 def CreateRandomRoadNetwork(map_x, map_y, width):
     ''' Randomly choice the number of road in road network '''
-    road_number = random.choice([2,3])
-    # road_number = 1
+    #road_number = random.choice([2,3])
+    road_number = 2
     
     print(f'Generate {road_number} roads')
     result_network = RoadNetwork(map_x, map_y)
