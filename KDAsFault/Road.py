@@ -335,8 +335,8 @@ def CreateRandomRoad(map_x, map_y, width):
 
 def CreateRandomRoadNetwork(map_x, map_y, width):
     ''' Randomly choice the number of road in road network '''
-    #road_number = random.choice([2,3])
-    road_number = 2
+    road_number = random.choice([2,3])
+    #road_number = 1
     
     print(f'Generate {road_number} roads')
     result_network = RoadNetwork(map_x, map_y)
