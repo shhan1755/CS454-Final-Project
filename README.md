@@ -31,6 +31,8 @@ python GA.py
 ```
 
 # Excute options (GA.py)
+
+## Parameters
 -p : population size (default = 25)
 
 -f : generation number (default = 40)
@@ -49,8 +51,7 @@ python GA.py
 
 -n : path geneartion number (default = 3)
 
-Road number option
-
+## Road number option
 To test for a single road, comment 337 line of Road.py and uncomment 338 line of Road.py.
 ```python
 # road_number = random.choice([2,3])
