@@ -276,6 +276,9 @@ class GA:
         new_list = []
         e_num = int(self.pop_size * self.elitism)
 
+        crossover_operator = ['join', 'merge']
+        imp_crossover_operator = ['imp_join', 'imp_merge']
+
         for gen in range(self.gen_num):
             offspring = []
 
@@ -286,7 +289,7 @@ class GA:
                 parent1 = self.selection(self.population, self.sel_size)
                 parent2 = self.selection(self.population, self.sel_size)
 
-                child1_rn = crossover_method([parent1.roadnetwork, parent2.roadnetwork], self.cr)
+                child1_rn = crossover_method([parent1.roadnetwork, parent2.roadnetwork], random.choice(imp_crossover_operator))
 
                 if (child1_rn[0] == True):
                     child1_rn = crossover_method([child1_rn[1]], 'mutation')
@@ -324,7 +327,7 @@ class GA:
                 genline.append(gen)
                 timeline.append([gen, best])
 
-            print(best)
+            # print(최고)
             #print("Best in generation:", gen, best[0], best[1].fitness)
         #print(best[1].fitnesss)
 
