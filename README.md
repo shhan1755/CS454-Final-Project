@@ -1,7 +1,7 @@
 # CS454-Final-Project
 K-DAsFault: Kaistian-Designed Automatically Testing Self-Driving Cars with Search-Based Procedural Content Generation
 
-# Team information
+# Team Information
 ## Team 21
 - 20160633 Cho Jaemin
 - 20170057 Geon Kim
@@ -9,12 +9,12 @@ K-DAsFault: Kaistian-Designed Automatically Testing Self-Driving Cars with Searc
 - 20170168 Jiin Kim
 - 20170719 Han Seunghee
 
-# Repository description
+# Repository Description
 - KDAsFault : Our K-DAsFault model.
 - Team21_Final Report : Final report of our project.
 - Team21_Final Presentation : Slides of our final presentation.
 
-# How to run the code
+# How to Run the Code
 1. Go to AD_Simul folder
 ```bash
 cd KDAsFault
@@ -34,7 +34,7 @@ cd KDAsFault
 python GA.py
 ```
 
-# Excute options (GA.py)
+# Excute Options (GA.py)
 
 ## Parameters
 -p : population size (default = 25)
@@ -55,7 +55,7 @@ python GA.py
 
 -n : path geneartion number (default = 3)
 
-## Road number option
+## Road Number Option
 To test for a single road, comment 337 line of Road.py and uncomment 338 line of Road.py.
 ```python
 # road_number = random.choice([2,3])
