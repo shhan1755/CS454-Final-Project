@@ -94,7 +94,7 @@ class Graph:
             print("This is Node: ", node_idx)
             node = self.node_list[node_idx]
             for intersect in node.intersection_list:
-                print(intersect.road, intersect.segment)
+                print(intersect.road, intersect.segment, node.is_end)
     
     def print_adjacency_matrix(self):
         print("Adjacency Matrix")
@@ -242,7 +242,7 @@ def GraphHwa_full(Road_net):
                 graph.add_edge(cur_node, prev_node)
 
     # Edge result
-    #`graph.print_adjacency_matrix()
+    #graph.print_adjacency_matrix()
 
     #print("GraphHwa_full End")
     return graph
@@ -373,10 +373,6 @@ def Make_path(road_net, graph, iteration):
                     path_num = path_num + weight
                     remain_node.remove(next_node_idx)
 
-            #print("Path ", iter, ": ", path_num)
-            #for node in path:
-            #    print(node.node_num)
-
             if (re_start != True):
                 if (path_num > max_path_num):
                     max_path = path
@@ -384,6 +380,9 @@ def Make_path(road_net, graph, iteration):
                 
                 if (re_start == False):
                     iter = iter + 1
+
+    #for node in max_path:
+    #    print(node.node_num)
 
     return max_path
 
@@ -453,6 +452,7 @@ def Route_path(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(segment.centerline[0])
                     line_y.append(segment.centerline[1])
+                    road_net.path.append([road_num, segment_idx])
                 if (second_done):
                     for idx in range(0, second_idx):
                         second_x.append(second_x_line[idx])
@@ -466,6 +466,7 @@ def Route_path(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(np.flip(segment.centerline[0]))
                     line_y.append(np.flip(segment.centerline[1]))
+                    road_net.path.append([road_num, segment_idx])
                 if (second_done):
                     back_second = list(range(second_idx, len(second_x_line)))
                     back_second.reverse()
@@ -518,6 +519,7 @@ def Route_path(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(segment.centerline[0])
                     line_y.append(segment.centerline[1])
+                    road_net.path.append([road_num, segment_idx])
             else:
                 if (first_done):
                     back_first = list(range(0, first_idx))
@@ -533,6 +535,7 @@ def Route_path(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(np.flip(segment.centerline[0]))
                     line_y.append(np.flip(segment.centerline[1]))
+                    road_net.path.append([road_num, segment_idx])
         else:
             if (road_num == prev_node.inter_tar[0]):
                 first_prev_x = prev_node.inter_tar[1]
@@ -595,6 +598,7 @@ def Route_path(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(segment.centerline[0])
                     line_y.append(segment.centerline[1])
+                    road_net.path.append([road_num, segment_idx])
                 if (second_done):
                     for idx in range(0, second_idx):
                         second_x.append(second_x_line[idx])
@@ -616,6 +620,7 @@ def Route_path(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(np.flip(segment.centerline[0]))
                     line_y.append(np.flip(segment.centerline[1]))
+                    road_net.path.append([road_num, segment_idx])
                 back_second = list(range(second_idx, len(second_x_line)))
                 back_second.reverse()
                 if (second_done):
@@ -632,7 +637,9 @@ def Route_path(road_net, graph, path):
             line_x.append(cur_line_x)
             line_y.append(cur_line_y)
 
-    return Merge_path([line_x, line_y])
+    ret = Merge_path([line_x, line_y])
+    road_net.waypoints = ret
+    return ret
 
 def Route_path_print(road_net, graph, path):
     line_x = []
@@ -700,6 +707,7 @@ def Route_path_print(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(segment.centerline[0])
                     line_y.append(segment.centerline[1])
+                    road_net.path.append([road_num, segment_idx])
                 if (second_done):
                     for idx in range(0, second_idx):
                         second_x.append(second_x_line[idx])
@@ -713,6 +721,7 @@ def Route_path_print(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(np.flip(segment.centerline[0]))
                     line_y.append(np.flip(segment.centerline[1]))
+                    road_net.path.append([road_num, segment_idx])
                 if (second_done):
                     back_second = list(range(second_idx, len(second_x_line)))
                     back_second.reverse()
@@ -765,6 +774,7 @@ def Route_path_print(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(segment.centerline[0])
                     line_y.append(segment.centerline[1])
+                    road_net.path.append([road_num, segment_idx])
             else:
                 if (first_done):
                     back_first = list(range(0, first_idx))
@@ -780,6 +790,7 @@ def Route_path_print(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(np.flip(segment.centerline[0]))
                     line_y.append(np.flip(segment.centerline[1]))
+                    road_net.path.append([road_num, segment_idx])
         else:
             if (road_num == prev_node.inter_tar[0]):
                 first_prev_x = prev_node.inter_tar[1]
@@ -842,6 +853,7 @@ def Route_path_print(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(segment.centerline[0])
                     line_y.append(segment.centerline[1])
+                    road_net.path.append([road_num, segment_idx])
                 if (second_done):
                     for idx in range(0, second_idx):
                         second_x.append(second_x_line[idx])
@@ -863,6 +875,7 @@ def Route_path_print(road_net, graph, path):
                     segment = road.path[segment_idx]
                     line_x.append(np.flip(segment.centerline[0]))
                     line_y.append(np.flip(segment.centerline[1]))
+                    road_net.path.append([road_num, segment_idx])
                 back_second = list(range(second_idx, len(second_x_line)))
                 back_second.reverse()
                 if (second_done):
@@ -879,8 +892,9 @@ def Route_path_print(road_net, graph, path):
             line_x.append(cur_line_x)
             line_y.append(cur_line_y)
 
-    return Merge_path_print([line_x, line_y])
-
+    ret = Merge_path_print([line_x, line_y])
+    road_net.waypoints = ret
+    return ret
 
 def Merge_path(path_line):
     path_x = path_line[0]
@@ -906,8 +920,6 @@ def Merge_path_print(path_line):
     for path_idx in range(segment_pt-1):
         if (segment_pt == 0):
             print("ZERO: ", path_idx)
-        plt.plot(path_x[path_idx][0], path_y[path_idx][0], color = 'black', marker = 'o')
-        plt.text(path_x[path_idx][0], path_y[path_idx][0], str(path_idx))
         if (path_idx%3 == 0):
             if (path_idx == 0):
                 plt.plot(list(path_x[path_idx]), list(path_y[path_idx]), color = 'Black');
@@ -919,7 +931,11 @@ def Merge_path_print(path_line):
             plt.plot(list(path_x[path_idx]), list(path_y[path_idx]), color = 'Green');
         pt_x = pt_x + list(path_x[path_idx][:-1])
         pt_y = pt_y + list(path_y[path_idx][:-1])
-    #plt.show()
+    time_name = "Ref"
+    filename = f'AD_Simul\\Map_data\\{time_name}.jpg'
+    plt.axis([0, 200, 0, 200])
+    #plt.savefig(filename)
+    plt.clf()
     pt_x = pt_x + list(path_x[-1])
     pt_y = pt_y + list(path_y[-1])
     
@@ -942,29 +958,29 @@ def Graph_Map(road_network, graph, path_line, curr_time):
             plt.plot(segment.backline[0], segment.backline[1], color = 'black')
 
         if road_idx == 0:
-            plt.plot(right[0], right[1], color='red')
-            plt.plot(left[0], left[1], color='red')
-            plt.plot(center[0], center[1], color='red')
+            plt.plot(right[0], right[1], color='black')
+            plt.plot(left[0], left[1], color='black')
+            plt.plot(center[0], center[1], color='black')
         
         if road_idx == 1:
-            plt.plot(right[0], right[1], color='blue')
-            plt.plot(left[0], left[1], color='blue')
-            plt.plot(center[0], center[1], color='blue')
+            plt.plot(right[0], right[1], color='black')
+            plt.plot(left[0], left[1], color='black')
+            plt.plot(center[0], center[1], color='black')
 
         if road_idx == 2:
-            plt.plot(right[0], right[1], color='green')
-            plt.plot(left[0], left[1], color='green')
-            plt.plot(center[0], center[1], color='green')
+            plt.plot(right[0], right[1], color='black')
+            plt.plot(left[0], left[1], color='black')
+            plt.plot(center[0], center[1], color='black')
 
         if road_idx == 3:
-            plt.plot(right[0], right[1], color='brown')
-            plt.plot(left[0], left[1], color='brown')
-            plt.plot(center[0], center[1], color='brown')
+            plt.plot(right[0], right[1], color='black')
+            plt.plot(left[0], left[1], color='black')
+            plt.plot(center[0], center[1], color='black')
 
         if road_idx == 4:
-            plt.plot(right[0], right[1], color='yellow')
-            plt.plot(left[0], left[1], color='yellow')
-            plt.plot(center[0], center[1], color='yellow')
+            plt.plot(right[0], right[1], color='black')
+            plt.plot(left[0], left[1], color='black')
+            plt.plot(center[0], center[1], color='black')
 
     # Plot Node
     for node_idx in range(graph.num_nodes):
@@ -978,10 +994,11 @@ def Graph_Map(road_network, graph, path_line, curr_time):
     # Plot path
     path_x = path_line[0]
     path_y = path_line[1]
-    plt.plot(path_x, path_y, color = 'black', linewidth = 2)
+    plt.plot(path_x, path_y, color = 'red', linewidth = 4)
 
     time_name = f'{curr_time}_map'
     filename = f'AD_Simul\\Map_data\\{time_name}.jpg'
+    plt.axis([0, 200, 0, 200])
     plt.savefig(filename)
     plt.clf()
     #plt.show()
